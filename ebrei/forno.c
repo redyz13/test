@@ -18,6 +18,8 @@ ebreo *alloca_ebreo(ebreo *e);
 ebreo *censisci_ebrei(ebreo *ebreo);
 void elenca_ebrei(ebreo *ebreo[], int index);
 void print_ebreo(ebreo *ebreo); 
+int metti_nel_forno(ebreo *ebreo[], int *index);
+void shifta_ebrei(ebreo *ebreo[], int i, int index);
 
 int main() {
     int s, index = 0;
@@ -25,7 +27,7 @@ int main() {
     ebrei_default(ebreo, &index);
 
     do {
-        printf("Soluzione totale\n1. Elenca ebrei\n2. Censisci ebrei\n0. Esci\n");
+        printf("Soluzione totale\n1. Elenca ebrei\n2. Censisci ebrei\n3. Metti nel forno\n0. Esci\n");
         printf("\nSelezione: ");
         scanf("%d", &s);
         while(getchar() != '\n'); // Usare ogni volta che si usa una scanf prima di fgets
@@ -40,6 +42,12 @@ int main() {
                 ebreo[index] = censisci_ebrei(ebreo[index]);
                 index++;
                 printf("[Ebreo Censito]\n\n");
+                break;
+            case 3:
+                if(metti_nel_forno(ebreo, &index))
+                    printf("[Ebreo Eliminato]\n\n");
+                else
+                    printf("[Ebreo non schedato]\n\n");
                 break;
             case 0:
                 exit(0);
@@ -129,4 +137,32 @@ ebreo *build_ebreo(const char nome[], const char cognome[], int anni, int id) {
     e->id = id;
 
     return e;
+}
+
+int metti_nel_forno(ebreo *ebreo[], int *index) {
+    int id, i;
+
+    printf("Inserisci l'id dell'ebreo: ");
+    scanf("%d", &id);
+    printf("\n");
+
+    for(i = 0; i <= *index - 1; i++) {
+        if(ebreo[i]->id == id) {
+            shifta_ebrei(ebreo, i, *index);
+            (*index)--;
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+void shifta_ebrei(ebreo *ebreo[], int i, int index) {
+    int j;
+
+    for(j = i; j < index - 1; j++) {
+        ebreo[j] = ebreo[j+1];
+    }
+
+    free(ebreo[index]);
 }
