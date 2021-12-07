@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #define MAX_LUN 40
+#define EBREI 30
 
 typedef struct {
     char *nome;
@@ -10,14 +11,18 @@ typedef struct {
     int id;
 } ebreo;
 
+ebreo *build_ebreo(const char nome[], const char cognome[], int anni, int id);
+void ebrei_default(ebreo *ebreo[], int *index);
 void leggi(char str[]);
 ebreo *alloca_ebreo(ebreo *e);
 ebreo *censisci_ebrei(ebreo *ebreo);
-void elenca_ebrei();
+void elenca_ebrei(ebreo *ebreo[], int index);
+void print_ebreo(ebreo *ebreo); 
 
 int main() {
     int s, index = 0;
-    ebreo *ebreo[30];
+    ebreo *ebreo[EBREI];
+    ebrei_default(ebreo, &index);
 
     do {
         printf("Soluzione totale\n1. Elenca ebrei\n2. Censisci ebrei\n0. Esci\n");
@@ -28,11 +33,13 @@ int main() {
 
         switch(s) {
             case 1:
-                elenca_ebrei(ebreo[index]);
+                printf("[Ebrei Censiti]\n\n");
+                elenca_ebrei(ebreo, index);
                 break;
             case 2:
                 ebreo[index] = censisci_ebrei(ebreo[index]);
-                // Rircorda l'incremento
+                index++;
+                printf("[Ebreo Censito]\n\n");
                 break;
             case 0:
                 exit(0);
@@ -68,11 +75,11 @@ ebreo *censisci_ebrei(ebreo *ebreo) {
 
     printf("Inserire il nome dell'ebreo: ");
     leggi(nome);
-    printf("\nInserire il cognome dell'ebreo: ");
+    printf("Inserire il cognome dell'ebreo: ");
     leggi(cognome);
-    printf("\nInserire l'età dell'ebreo: ");
+    printf("Inserire l'età dell'ebreo: ");
     scanf("%d", &anni);
-    printf("\nCon quale numero vuoi timbrarlo?: ");
+    printf("Con quale numero vuoi timbrarlo?: ");
     scanf("%d", &id);
     printf("\n");
 
@@ -86,6 +93,40 @@ ebreo *censisci_ebrei(ebreo *ebreo) {
     return ebreo;
 }
 
-void elenca_ebrei(ebreo *ebreo) {
-    printf("\nNome: %s", ebreo->nome);
+void elenca_ebrei(ebreo *ebreo[], int index) {
+    int i;
+
+    for(i = 0; i <= index - 1; i++)
+        print_ebreo(ebreo[i]);
+}
+
+void print_ebreo(ebreo *ebreo) {
+    printf("Nome: %s", ebreo->nome);
+    printf("\nCognome: %s", ebreo->cognome);
+    printf("\nAnni: %d", ebreo->anni);
+    printf("\nId: %d\n\n", ebreo->id);
+}
+
+void ebrei_default(ebreo *ebreo[], int *index) {
+    ebreo[0] = build_ebreo("Angelo", "De Luca", 19, 669);   
+    ebreo[1] = build_ebreo("Vittorio Maria", "Borrello", 23, 880); 
+    ebreo[2] = build_ebreo("Pierpaolo", "Pastore", 23, 890); 
+    ebreo[3] = build_ebreo("Luca", "Casillo", 19, 190); 
+    ebreo[4] = build_ebreo("Rosalia", "Fortino", 22, 290); 
+    ebreo[5] = build_ebreo("Frank", "Lo Schiavo", 34, 790); 
+    *index = 6;
+}
+
+ebreo *build_ebreo(const char nome[], const char cognome[], int anni, int id) {
+    ebreo *e = NULL;
+    e = alloca_ebreo(e);
+
+    e->nome = malloc(strlen(nome) + 1); 
+    strcpy(e->nome, nome);
+    e->cognome = malloc(strlen(cognome) + 1); 
+    strcpy(e->cognome, cognome);
+    e->anni = anni;
+    e->id = id;
+
+    return e;
 }
