@@ -13,7 +13,7 @@ typedef struct {
 void leggi(char str[]);
 ebreo *alloca_ebreo(ebreo *e);
 ebreo *censisci_ebrei(ebreo *ebreo);
-//void elenca_ebrei();
+void elenca_ebrei();
 
 int main() {
     int s, index = 0;
@@ -23,14 +23,16 @@ int main() {
         printf("Soluzione totale\n1. Elenca ebrei\n2. Censisci ebrei\n0. Esci\n");
         printf("\nSelezione: ");
         scanf("%d", &s);
+        while(getchar() != '\n'); // Usare ogni volta che si usa una scanf prima di fgets
         printf("\n");
 
         switch(s) {
             case 1:
-                //elenca_ebrei();
+                elenca_ebrei(ebreo[index]);
                 break;
             case 2:
                 ebreo[index] = censisci_ebrei(ebreo[index]);
+                // Rircorda l'incremento
                 break;
             case 0:
                 exit(0);
@@ -82,4 +84,8 @@ ebreo *censisci_ebrei(ebreo *ebreo) {
     ebreo->id = id;
 
     return ebreo;
+}
+
+void elenca_ebrei(ebreo *ebreo) {
+    printf("\nNome: %s", ebreo->nome);
 }
