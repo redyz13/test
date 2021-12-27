@@ -1,34 +1,25 @@
 #include <stdio.h>
-
-int *get_max(int *x, int y);
+#include <stdlib.h>
 
 int main() {
-    int x = 15, y = 10;
-    int *max;
+    FILE *fp, *fpr;
 
-    max = get_max(&x, y);
+    fp = fopen("mammt", "a");
+    fpr = fopen("mammt", "r");
 
-    printf("Max: %d\n", *max);
-    printf("X: %d\n", x);
+    if(!fp) exit(2);
+    if(!fpr) exit(2);
+
+    fprintf(fp, "%d", 10);
+
+    fprintf(fp, "%c", '\n');
+
+    fprintf(fp, "%d", 20);
+
+    int x;
+
+    fscanf(fpr, "%d", &x);
+    printf("%d", x);
 
     return 0;
-}
-
-int *get_max(int *x, int y) {
-    int *max;
-    int ciao = 5;
-
-    if(*x > y) {
-        max = x;
-    }
-    else {
-        max = &y;
-    }
-
-    max = &ciao;
-    printf("%p\n", max);
-    printf("%p\n", &ciao);
-    (*x)++;
-
-    return max;
 }

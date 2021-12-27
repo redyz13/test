@@ -1,22 +1,13 @@
 #include <stdio.h>
-#include "persona.h"
+
+void mammt(int x);
 
 int main() {
-    persona *fabio = NULL, *giovannino = NULL;
+    int x = 10;
 
-    printf("--- Fabbione ---\n\n");
+    mammt(x);
+}
 
-    fabio = alloca_persona(fabio);
-    *fabio = build_persona("Fabio", "Fabbione", 20);
-
-    print_persona(*fabio);
-
-    printf("\n--- Giovannino ---\n\n");
-
-    giovannino = alloca_persona(giovannino);
-    *giovannino = build_persona("Giovannino", "La Marca", 19);
-
-    print_persona(*giovannino);
-
-    return 0;
+void mammt(int x) {
+    printf("%d", x);
 }
