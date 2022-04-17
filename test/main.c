@@ -17,17 +17,11 @@ int main(void) {
     addLast(list, p2);
     addLast(list, p3);
 
+    list = reverseList(list);
     printList(list);
 
-    removeItemPos(list, 0);
-    removeItemPos(list, 0);
-    removeItemPos(list, 0);
-    Item p4 = getLast(list);
-
-    putchar('\n');
-
-    if(p4 != NULL)
-        printItem(p4);
+    removeItem(list, p3);
+    printf("Contains: %d\n", contains(list, p3));
 
     freeItem(p1);
     freeItem(p2);

@@ -38,14 +38,24 @@ int removeItem(List list, Item it);
 */
 int removeItemPos(List list, int pos);
 
+/* Get the value at the given position, if the position
+*  doesn't exist return NULLITEM, if the position is 0, get the 
+*  value at the beginning
+*/
 Item get(List list, int pos);
 
-/* Get the value at the head, if the list is empty, return
+/* Get the first value, if the list is empty, return
 *  NULLITEM
 */
 Item getFirst(List list);
 
+/* Get the last value, if the list is empty, return
+*  NULLITEM
+*/
 Item getLast(List list);
+
+// Check if the value is in the list
+int contains(List list, Item it);
 
 // Print the entire list to stdout
 void printList(List list);

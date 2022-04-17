@@ -115,13 +115,27 @@ Item getLast(List list) {
     return getItemPos(head, size);
 }
 
+int contains(List list, Item it) {
+    Node head = list->head; 
+    
+    while(!isNull(head)){
+        if(isEqual(it, getItem(head))){
+            return 1;
+        }
+        
+        head = nextNode(head);
+    }
+
+    return 0;
+}
+
 void printList(List list) {
     Node head = list->head;
     int i = 0;
 
     // Traverse through nodes of the list and print data of each node
     while(!isNull(head)) {
-        printf("Elemento %d = ", i);
+        printf("Element %d = ", i);
         printItem(getItem(head));
         putchar('\n');
         head = nextNode(head);
