@@ -171,11 +171,22 @@ void freeList(List list) {
     // Travers through nodes of the list and free each node
     while(!isNull(head)) {
         tmp = head;
-        /* If the items are allocated they will be deallocated 
-        *  You can comment this line if you don't need it (XXX)
-        */
-        // freeItem(getItem(tmp));
+        head = nextNode(head);
+        free(tmp);
+    }
 
+    free(list);
+}
+
+void destroyList(List list) {
+    Node head, tmp;
+
+    head = list->head;
+
+    // Travers through nodes of the list and free each node
+    while(!isNull(head)) {
+        tmp = head;
+        freeItem(getItem(tmp));
         head = nextNode(head);
         free(tmp);
     }
