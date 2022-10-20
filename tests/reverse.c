@@ -14,12 +14,10 @@ void swap(void *x, void *y, size_t elsize) {
 }
 
 void reverse(void *arr, const size_t elsize, unsigned start, unsigned end) {
-    if (start > end) return;
+    if (start >= end) return;
 
-    if (start < end) {
-        swap(&(((char *)arr)[start * elsize]), &(((char *)arr)[end * elsize]), elsize);
-        reverse(arr, elsize, start + 1, end - 1);
-    }
+    swap(&(((char *)arr)[start * elsize]), &(((char *)arr)[end * elsize]), elsize);
+    reverse(arr, elsize, start + 1, end - 1);
 }
 
 // Testing
