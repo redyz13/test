@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <unistd.h>
 
 void swap(void *x, void *y, size_t elsize) {
     char tmp;
