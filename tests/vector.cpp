@@ -16,15 +16,14 @@ struct Vector2D {
     }
 };
 
-std::ostream& operator<<(std::ostream& stream, Vector2D& v) {
+std::ostream& operator<<(std::ostream& stream, const Vector2D& v) {
     stream << '(' << v.x << ',' << v.y << ')' << std::endl;
     return stream;
 }
 
 int main() {
     Vector2D v1(5, 10), v2(15, 20);
-    Vector2D sum = v1 + v2;
 
     std::cout << v1 << v2;
-    std::cout << sum;
+    std::cout << v1 + v2;
 }
