@@ -5,9 +5,9 @@
 
 int func(int *a, int l, int r, int x) {
     if (l > r)
-        return 0;
+        return -1;
     if (l == r) {
-        return a[l] == x ? l : 0;
+        return a[l] == x ? l : -1;
     }
 
     int c = (l + r) / 2;
