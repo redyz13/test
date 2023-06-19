@@ -64,6 +64,7 @@ int main(int argc, char **argv) {
     qsort(birthdays, size, sizeof(struct Birthday), compare);
 
     printf("Giorni ordinati e stampati su file:\n\n");
+
     for (int i = 0; i < size; i++)
         printf("%d %s %s\n", birthdays[i].dayAndMonth % 100,
             getMonth(birthdays[i].dayAndMonth / 100), birthdays[i].name);
@@ -73,6 +74,8 @@ int main(int argc, char **argv) {
     for (int i = 0; i < size; i++)
         fprintf(file, "%d %s %s\n", birthdays[i].dayAndMonth % 100,
             getMonth(birthdays[i].dayAndMonth / 100), birthdays[i].name);
+
+    fclose(file);
 
     putchar('\n');
 
